@@ -2,7 +2,7 @@ package com.game.model;
 
 public enum OutcomeType {
     STRIKE("Strike"),
-    MULTITASKING("Multistrike"),
+    MULTISTRIKE("Multistrike"),
     RED_STRIKE("Red strike"),
     STRIKER_STRIKE("Striker strike"),
     DEFUNCT_COIN("Defunct coin"),
@@ -10,7 +10,7 @@ public enum OutcomeType {
 
     private String outcomeType;
 
-    OutcomeType(String type){
+    OutcomeType(String type) {
         this.outcomeType = type;
     }
 
@@ -18,9 +18,9 @@ public enum OutcomeType {
         return outcomeType;
     }
 
-    public static OutcomeType getOutcomeValue(String type){
-        for(OutcomeType enumType : OutcomeType.values()){
-            if(enumType.getOutcomeType().equalsIgnoreCase(type)){
+    public static OutcomeType getOutcomeValue(String type) {
+        for (OutcomeType enumType : OutcomeType.values()) {
+            if (enumType.getOutcomeType().equalsIgnoreCase(type)) {
                 return enumType;
             }
         }

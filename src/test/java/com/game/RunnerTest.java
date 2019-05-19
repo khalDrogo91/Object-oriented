@@ -22,8 +22,8 @@ public class RunnerTest {
         Player a = new Player("A");
         Player b = new Player("B");
         Game game = new Game(a, b);
-        assertEquals(9, game.getBlackCoinsCount());
-        assertEquals(1, game.getRedCoinCount());
+        assertEquals(9, game.getCoin().getBlackCoinsCount());
+        assertEquals(1, game.getCoin().getRedCoinCount());
         assertEquals(2, game.getPlayersCount());
     }
 
@@ -33,7 +33,7 @@ public class RunnerTest {
         game.outcome("strike");
         assertEquals(1, game.getPlayer("A").getScore());
         assertEquals(0, game.getPlayer("B").getScore());
-        assertEquals(8, game.getBlackCoinsCount());
+        assertEquals(8, game.getCoin().getBlackCoinsCount());
     }
 
     @Test

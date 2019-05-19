@@ -8,8 +8,7 @@ public class Game {
 
     private Player players[] = new Player[2];
     private RuleEngine rules = new RuleEngine();
-    private int blackCoinsCount = 9;
-    private int redCoinCount = 1;
+    private Coin coin = new Coin();
 
     public Game(Player a, Player b) {
         players[0] = a;
@@ -20,14 +19,6 @@ public class Game {
     private void setDefaultTurns() {
         players[0].setTurn(true);
         players[1].setTurn(false);
-    }
-
-    public int getBlackCoinsCount() {
-        return this.blackCoinsCount;
-    }
-
-    public int getRedCoinCount() {
-        return this.redCoinCount;
     }
 
     public int getPlayersCount() {
@@ -44,16 +35,16 @@ public class Game {
         return player;
     }
 
+    public Coin getCoin() {
+        return coin;
+    }
+
+    public void setCoin(Coin coin) {
+        this.coin = coin;
+    }
+
     public void outcome(String type) {
-
-
-        rules.apply(getOutcomeValue(type), blackCoinsCount, getStrikingPlayer());
-
-        if ("STRIKE".equalsIgnoreCase(type)) {
-            blackCoinsCount--;
-            players[0].setScore(players[0].getScore() + 1);
-        }
-
+        rules.apply(getOutcomeValue(type), coin, getStrikingPlayer());
         toggleTurns();
     }
 
