@@ -9,11 +9,14 @@ public class Coin {
         return this.blackCoinsCount;
     }
 
+    public void setBlackCoinsCount(int blackCoinsCount) {
+        this.blackCoinsCount = blackCoinsCount;
+    }
+
     public int getRedCoinCount() {
         return this.redCoinCount;
     }
-
-    public void setBlackCoinsCount(int blackCoinsCount) {
-        this.blackCoinsCount = blackCoinsCount;
+    public void setRedCoinCount(int redCoinCount) {
+        this.redCoinCount = redCoinCount;
     }
 }

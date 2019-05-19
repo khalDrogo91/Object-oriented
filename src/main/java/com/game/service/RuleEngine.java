@@ -14,7 +14,15 @@ public class RuleEngine {
             case MULTISTRIKE:
                 multiStrike(strikingPlayer);
                 break;
+            case RED_STRIKE:
+                redStrike(coinsCount, strikingPlayer);
+                break;
         }
+    }
+
+    private void redStrike(Coin coinsCount, Player strikingPlayer) {
+        coinsCount.setRedCoinCount(coinsCount.getRedCoinCount() -1);
+        strikingPlayer.setScore(strikingPlayer.getScore() + 3);
     }
 
     private void multiStrike(Player strikingPlayer) {

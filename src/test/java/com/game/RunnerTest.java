@@ -60,6 +60,13 @@ public class RunnerTest {
         assertEquals(2, game.getPlayer("A").getScore());
     }
 
+    @Test
+    public void thatPlayerGetsRedStrike() {
+        Game game = setUpGame();
+        game.outcome("Red strike");
+        assertEquals(3, game.getPlayer("A").getScore());
+    }
+
     private Game setUpGame() {
         Player a = new Player("A");
         Player b = new Player("B");
