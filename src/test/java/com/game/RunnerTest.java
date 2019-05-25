@@ -14,7 +14,6 @@ public class RunnerTest {
         Game game = setUpGame();
         assertEquals(true, a.isHasTurn());
         assertEquals(a, game.getStrikingPlayer());
-
     }
 
     @Test
@@ -67,10 +66,37 @@ public class RunnerTest {
         assertEquals(3, game.getPlayer("A").getScore());
     }
 
+    @Test
+    public void thatPlayerLosesAPointWhenStrikerStrike(){
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(2);
+        game.outcome("Striker strike");
+        assertEquals(1, game.getPlayer("A").getScore());
+    }
+
+    @Test
+    public void thatPlayerLosesAPointWhenCoinGoesOutOfPlay(){
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(2);
+        game.outcome("Defunct coin");
+        assertEquals(0, game.getPlayer("A").getScore());
+        assertEquals(8, game.getCoin().getBlackCoinsCount());
+    }
+
+    @Test
+    public void thatForThreeUnsuccessfulTurnPlayerLosesAPoint(){
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(2);
+        game.outcome("Defunct coin");
+        assertEquals(0, game.getPlayer("A").getScore());
+    }
+
     private Game setUpGame() {
         Player a = new Player("A");
         Player b = new Player("B");
         return new Game(a, b);
     }
+
+
 
 }

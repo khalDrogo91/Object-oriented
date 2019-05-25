@@ -17,20 +17,35 @@ public class RuleEngine {
             case RED_STRIKE:
                 redStrike(coinsCount, strikingPlayer);
                 break;
+            case STRIKER_STRIKE:
+                strikerStrike(strikingPlayer);
+                break;
+            case DEFUNCT_COIN:
+                DefunctCoinStrike(coinsCount, strikingPlayer);
+                break;
         }
     }
 
+    private void DefunctCoinStrike(Coin coinsCount, Player strikingPlayer) {
+        strikingPlayer.setScore(strikingPlayer.getScore() - 2);
+        coinsCount.setBlackCoinsCount(coinsCount.getBlackCoinsCount() - 1);
+    }
+
+    private void strikerStrike(Player strikingPlayer) {
+        strikingPlayer.setScore(strikingPlayer.getScore() - 1);
+    }
+
     private void redStrike(Coin coinsCount, Player strikingPlayer) {
-        coinsCount.setRedCoinCount(coinsCount.getRedCoinCount() -1);
+        coinsCount.setRedCoinCount(coinsCount.getRedCoinCount() - 1);
         strikingPlayer.setScore(strikingPlayer.getScore() + 3);
     }
 
     private void multiStrike(Player strikingPlayer) {
-        strikingPlayer.setScore(strikingPlayer.getScore()+2);
+        strikingPlayer.setScore(strikingPlayer.getScore() + 2);
     }
 
     private void strike(Coin blackCoinsCount, Player strikingPlayer) {
-        blackCoinsCount.setBlackCoinsCount(blackCoinsCount.getBlackCoinsCount()-1);
+        blackCoinsCount.setBlackCoinsCount(blackCoinsCount.getBlackCoinsCount() - 1);
         strikingPlayer.setScore(strikingPlayer.getScore() + 1);
     }
 
