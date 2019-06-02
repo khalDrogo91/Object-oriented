@@ -67,7 +67,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void thatPlayerLosesAPointWhenStrikerStrike(){
+    public void thatPlayerLosesAPointWhenStrikerStrike() {
         Game game = setUpGame();
         game.getPlayer("A").setScore(2);
         game.outcome("Striker strike");
@@ -75,7 +75,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void thatPlayerLosesAPointWhenCoinGoesOutOfPlay(){
+    public void thatPlayerLosesAPointWhenCoinGoesOutOfPlay() {
         Game game = setUpGame();
         game.getPlayer("A").setScore(2);
         game.outcome("Defunct coin");
@@ -85,7 +85,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void thatForThreeUnsuccessfulTurnPlayerLosesAPoint(){
+    public void thatForThreeUnsuccessfulTurnPlayerLosesAPoint() {
         Game game = setUpGame();
         game.getPlayer("A").setScore(4);
         game.outcome("Striker strike");
@@ -98,7 +98,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void thatFoulCountIncreasesWhenPlayerLosesAPoint(){
+    public void thatFoulCountIncreasesWhenPlayerLosesAPoint() {
         Game game = setUpGame();
         game.getPlayer("A").setScore(2);
         game.outcome("Striker strike");
@@ -106,7 +106,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void thatForThreeFoulPlayerLosesAdditionalPoint(){
+    public void thatForThreeFoulPlayerLosesAdditionalPoint() {
         Game game = setUpGame();
         game.getPlayer("A").setScore(2);
         game.getPlayer("A").raiseFoulCount();
@@ -117,12 +117,29 @@ public class RunnerTest {
         assertEquals(1, game.getPlayer("A").getScore());
     }
 
+    @Test
+    public void thatGameIsWonByAPlayer() {
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(6);
+        game.getPlayer("B").setScore(3);
+        game.outcome("strike");
+        assertEquals(game.getPlayer("A"), game.getWinner());
+    }
+
+    @Test
+    public void thatMatchIsDrawWhenCoinsAreExaustedAndNobodyWins() {
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(1);
+        game.getPlayer("B").setScore(3);
+        game.getCoin().setBlackCoinsCount(1);
+        game.getCoin().setRedCoinCount(0);
+        game.outcome("strike");
+        assertEquals("DRAW", game.getGameScoreStatus());
+    }
+
     private Game setUpGame() {
         Player a = new Player("A");
         Player b = new Player("B");
         return new Game(a, b);
     }
-
-
-
 }

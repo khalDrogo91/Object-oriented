@@ -7,21 +7,26 @@ import java.util.Objects;
 public class Player {
 
     private String name;
-    private boolean hasTurn = false;
+    private boolean hasTurn;
     private int score = 0;
     private List<Boolean> turnStatuses;
     private int foulCount = 0;
+    private boolean isWinner;
 
 
     public Player(String name) {
         this.name = name;
         turnStatuses = new ArrayList<>();
+        isWinner = false;
+        hasTurn = false;
     }
 
     public Player(String name, boolean turn) {
         this.name = name;
+        hasTurn = false;
         this.hasTurn = turn;
         turnStatuses = new ArrayList<>();
+        isWinner = false;
     }
 
     public boolean isHasTurn() {
@@ -72,5 +77,13 @@ public class Player {
 
     public void setFoulCount(int count) {
         foulCount = count;
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean b) {
+        isWinner = b;
     }
 }
