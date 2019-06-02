@@ -1,5 +1,7 @@
 package com.game.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Player {
@@ -7,14 +9,19 @@ public class Player {
     private String name;
     private boolean hasTurn = false;
     private int score = 0;
+    private List<Boolean> turnStatuses;
+    private int foulCount = 0;
+
 
     public Player(String name) {
         this.name = name;
+        turnStatuses = new ArrayList<>();
     }
 
     public Player(String name, boolean turn) {
         this.name = name;
         this.hasTurn = turn;
+        turnStatuses = new ArrayList<>();
     }
 
     public boolean isHasTurn() {
@@ -47,4 +54,23 @@ public class Player {
                 Objects.equals(name, player.name);
     }
 
+    public List<Boolean> getSuccessiveTurnStatuses() {
+        return turnStatuses;
+    }
+
+    public void setCurrentTurnStatus(boolean status) {
+        turnStatuses.add(status);
+    }
+
+    public void raiseFoulCount() {
+        foulCount++;
+    }
+
+    public int getFoulCount() {
+        return foulCount;
+    }
+
+    public void setFoulCount(int count) {
+        foulCount = count;
+    }
 }

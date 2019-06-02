@@ -2,7 +2,7 @@ package com.game.model;
 
 import com.game.service.RuleEngine;
 
-import static com.game.model.OutcomeType.*;
+import static com.game.model.OutcomeType.getOutcomeValue;
 
 public class Game {
 
@@ -39,12 +39,15 @@ public class Game {
         return coin;
     }
 
-    public void setCoin(Coin coin) {
+   /* public void setCoin(Coin coin) {
         this.coin = coin;
-    }
+    }*/
 
     public void outcome(String type) {
         rules.apply(getOutcomeValue(type), coin, getStrikingPlayer());
+        rules.applyTurnRule(getStrikingPlayer());
+        rules.applyFoulRule(getStrikingPlayer());
+
         toggleTurns();
     }
 

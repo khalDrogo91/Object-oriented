@@ -81,14 +81,40 @@ public class RunnerTest {
         game.outcome("Defunct coin");
         assertEquals(0, game.getPlayer("A").getScore());
         assertEquals(8, game.getCoin().getBlackCoinsCount());
+        assertEquals(1, game.getPlayer("A").getFoulCount());
     }
 
     @Test
     public void thatForThreeUnsuccessfulTurnPlayerLosesAPoint(){
         Game game = setUpGame();
-        game.getPlayer("A").setScore(2);
-        game.outcome("Defunct coin");
+        game.getPlayer("A").setScore(4);
+        game.outcome("Striker strike");
+        game.outcome("strike");//B
+        game.outcome("Striker strike");
+        game.outcome("strike");//B
+        game.outcome("Striker strike");
+        assertEquals(4, game.getPlayer("A").getFoulCount());
         assertEquals(0, game.getPlayer("A").getScore());
+    }
+
+    @Test
+    public void thatFoulCountIncreasesWhenPlayerLosesAPoint(){
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(2);
+        game.outcome("Striker strike");
+        assertEquals(1, game.getPlayer("A").getFoulCount());
+    }
+
+    @Test
+    public void thatForThreeFoulPlayerLosesAdditionalPoint(){
+        Game game = setUpGame();
+        game.getPlayer("A").setScore(2);
+        game.getPlayer("A").raiseFoulCount();
+        game.getPlayer("A").raiseFoulCount();
+        game.outcome("strike"); //A
+        game.outcome("strike");///B
+        game.outcome("Striker strike");///A
+        assertEquals(1, game.getPlayer("A").getScore());
     }
 
     private Game setUpGame() {
